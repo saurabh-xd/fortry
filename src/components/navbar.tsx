@@ -1,54 +1,56 @@
-"use client";
-import { IconMenu2 } from "@tabler/icons-react";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
 
-export const Navbar = () => {
-  const links = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
-  ];
+import { LogOut, Moon, Settings, User } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
-  const [open, setOpen] = useState(false);
+function Navbar() {
   return (
-    <div className="relative">
-      <div className="flex relative md:rounded-full bg-white justify-between items-center md:mt-4 max-w-4xl mx-auto  px-2 py-2 md:shadow-aceternity">
-        <h1 className="font-bold text-neutral-600">
-          fortry
-        </h1>
-        <div className="hidden md:flex items-center gap-4 text-sm text-neutral-500 mr-10 ">
-          {links.map((link, index) => (
-            <Link
-              className="hover:text-neutral-900"
-              href={link.href}
-              key={index}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-        <button onClick={() => setOpen(!open)} className="md:hidden">
-          <IconMenu2 />
-        </button>
-        {open && (
-          <div className="absolute md:hidden inset-x-0  bg-white rounded-md shadow-aceternity top-15 max-w-[95%]  mx-auto">
-            <div className="flex  flex-col  items-start gap-4 text-sm text-neutral-500  p-4">
-              {links.map((link, index) => (
-                <Link
-                  className="hover:text-neutral-900"
-                  href={link.href}
-                  key={index}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+   <nav className='p-4 flex items-center justify-between'>
+    colaapase
+
+    <div className='flex items-center gap-4'>
+      <Link href='/'>Dashboard</Link>
+      <Moon/>
+     
+<DropdownMenu>
+  <DropdownMenuTrigger>
+     <Avatar>
+  <AvatarImage src="https://avatars.githubusercontent.com/u/203829217?v=4" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent sideOffset={10}>
+    <DropdownMenuLabel>  
+      My Account
+    </DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem >
+     <User className='h-[1.2rem] w-[1.2rem] mr-2'/>
+      Profile
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Settings className='h-[1.2rem] w-[1.2rem] mr-2'/>
+      Settings
+    </DropdownMenuItem>
+    <DropdownMenuItem variant='destructive'>
+      <LogOut className='h-[1.2rem] w-[1.2rem] mr-2'/>
+      Logout
+    </DropdownMenuItem>
+    
+  </DropdownMenuContent>
+</DropdownMenu>
     </div>
-  );
-};
+   </nav>
+  )
+}
+
+export default Navbar
